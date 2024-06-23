@@ -216,6 +216,7 @@ const computeServerStatus = async () => {
     server = {
         defaultMessage: isRunning ? "Thank you for playing! See you next time!" : "Time to play STARFLY-13!",
         duration: getHumanReadableDuration(lastDate),
+        isRunning: isRunning,
         status: isRunning ? "Up" : "Down",
         statusImageUrl: isRunning ? "img/server-up.webp" : "img/server-down.webp",
     };
