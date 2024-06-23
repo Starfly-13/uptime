@@ -281,7 +281,7 @@ app.post('/server', checkAuth, async (req, res) => {
 // start listening for incoming connections to the uptime service
 const credentials = { cert: TLS_CERT, key: TLS_KEY };
 const httpsServer = https.createServer(credentials, app);
-httpsServer.listen(PORT, () => {
+httpsServer.listen(PORT, '0.0.0.0', () => {
     console.log(`Uptime is running on ${BASE_URL}`);
 });
 
