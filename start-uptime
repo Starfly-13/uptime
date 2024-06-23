@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# start-uptime
+
+export BASE_URL=${BASE_URL:="https://127.0.0.1:8443"}
+#export BASE_URL=${BASE_URL:="https://planet.starfly13.space:8002"}
+export CLIENT_ID=${CLIENT_ID:="1200331761419300965"}
+export CLIENT_SECRET=${CLIENT_SECRET:="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"}
+export DISCORD_REDIRECT_URI=${DISCORD_REDIRECT_URI:="${BASE_URL}/auth"}
+export DISCORD_WEBHOOK_URL=${DISCORD_WEBHOOK_URL:="https://discord.com/api/webhooks/xxxxxxxxxxxxxxxxxxx/zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"}  # bot-testing-lab
+#export DISCORD_WEBHOOK_URL=${DISCORD_WEBHOOK_URL:="https://discord.com/api/webhooks/xxxxxxxxxxxxxxxxxxx/zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"}  # uptime-ping
+export DOCKER_CONTAINER_NAME=${DOCKER_CONTAINER_NAME:="starfly"}
+export DOCKER_IMAGE_NAME=${DOCKER_IMAGE_NAME:="ghcr.io/starfly-13/starfly-13:master"}
+export PORT=${PORT:="8443"}
+#export PORT=${PORT:="8002"}
+export SS13_CONFIG_PATH=${SS13_CONFIG_PATH:="/home/ss13/STARFLY-13/config"}
+export SS13_DATA_PATH=${SS13_DATA_PATH:="/home/ss13/STARFLY-13/data"}
+export TLS_CERT=${TLS_CERT:="$(<cert.pem)"}
+export TLS_KEY=${TLS_KEY:="$(<key.pem)"}
+export UPTIME_ROLE=${UPTIME_ROLE:="1190665573462462509"}  # @Uptime + 1 for testing purposes
+#export UPTIME_ROLE=${UPTIME_ROLE:="1190665573462462508"}  # @Uptime
+
+TIMESTAMP=$(date +%s)
+node index.js 1>log/uptime-${TIMESTAMP}.1 2>log/uptime-${TIMESTAMP}.2 &
+echo $! >log/uptime-${TIMESTAMP}.pid
