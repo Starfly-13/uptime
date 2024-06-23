@@ -1,0 +1,70 @@
+/* server.css */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #313338;
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+#header {
+    width: 100%;
+    background-color: #282a2e;
+    padding: 10px 0;
+    text-align: center;
+}
+
+#user-plate {
+    display: inline-block;
+    padding: 10px;
+    background-color: #3a3d41;
+    border-radius: 5px;
+}
+
+#server-status {
+    text-align: center;
+    margin: 10px 0;
+}
+
+.server-status-image {
+    width: 512px;
+    height: 512px;
+    display: block;
+    margin: 0 auto;
+}
+
+#admin-controls {
+    text-align: center;
+    margin-top: 10px;
+}
+
+#adminMessage {
+    width: 100%;
+    max-width: 500px;
+    height: 100px;
+    margin-bottom: 10px;
+}
+
+#uptimeRole {
+    margin-right: 10px;
+}
+
+#server-action {
+    background-color: #444;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+#server-action:hover {
+    background-color: #555;
+}

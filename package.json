@@ -1,0 +1,35 @@
+{
+    "name": "uptime",
+    "version": "0.1.0",
+    "description": "Web interface to control STARFLY-13 server uptime",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Starfly-13/uptime.git"
+    },
+    "keywords": [
+        "discord",
+        "server",
+        "shiptest",
+        "space station 13",
+        "ss13",
+        "starfly-13"
+    ],
+    "author": "Patrick Meade <blinkdog@protonmail.com>",
+    "license": "AGPL-3.0",
+    "bugs": {
+        "url": "https://github.com/Starfly-13/uptime/issues"
+    },
+    "homepage": "https://github.com/Starfly-13/uptime#readme",
+    "dependencies": {
+        "cookie-parser": "^1.4.6",
+        "express": "^4.19.2",
+        "hbs": "^4.2.0",
+        "helmet": "^7.1.0",
+        "undici": "^6.19.2",
+        "uuid": "^10.0.0"
+    }
+}

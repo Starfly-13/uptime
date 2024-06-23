@@ -1,0 +1,84 @@
+/* login.css */
+
+body {
+    background-color: #313338;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    background-color: #282a2e;
+    padding: 10px 20px;
+    text-align: center;
+    border-bottom: 2px solid #444;
+}
+
+nav {
+    background-color: #3a3d41;
+    padding: 10px;
+    border-top: 1px solid #444;
+    border-bottom: 1px solid #444;
+}
+
+nav a {
+    color: #ffffff;
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: #c0c0c0;
+}
+
+main {
+    padding: 20px;
+    background-color: #3b3e42;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+footer {
+    background-color: #282a2e;
+    padding: 10px 20px;
+    text-align: center;
+    border-top: 2px solid #444;
+    margin-top: 20px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.text-left {
+    text-align: left;
+}
+
+button {
+    background-color: #444;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #555;
+}
