@@ -333,9 +333,10 @@ async function isDockerContainerRunning(containerName) {
         if (stderr) {
             console.error(`Stderr: ${stderr}`);
         }
-        if (stdout.trim() === containerName) {
-            return true;
-        }
+        // split the output into an array of container names
+        const containerNames = stdout.trim().split('\n');
+        // check if any of the container names exactly match the containerName
+        return containerNames.includes(containerName);
     } catch (error) {
         console.error(`Error: ${error.message}`);
     }
