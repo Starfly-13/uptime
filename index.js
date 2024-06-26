@@ -347,18 +347,24 @@ async function isDockerContainerRunning(containerName) {
 
 // send the uptime message (and possibly ping) to the discord webhook
 async function postToDiscordWebhook(admin, message, uptimeRole) {
-    // if the admin didn't provide any message to send, bail
-    if (!message) {
-        console.log('No message was provided. Nothing will be posted to Discord.');
-        return;
-    }
     // if the webhook isn't defined, bail
     if (!DISCORD_WEBHOOK_URL) {
         console.log('DISCORD_WEBHOOK_URL not defined in environment variables. Nothing will be posted to Discord.');
         return;
     }
+    // if the admin unchecked the notification box, bail
+    if (!uptimeRole) {
+        console.log('@Uptime role box was unchecked. Nothing will be posted to Discord.');
+        return;
+    }
+    // if the admin didn't provide any message to send, bail
+    if (!message) {
+        console.log('No message was provided. Nothing will be posted to Discord.');
+        return;
+    }
 
-    const content = uptimeRole ? `<@&${UPTIME_ROLE}> ${message}` : message;
+    // build the message we'll send to Discord, using their notification syntax
+    const content = `<@&${UPTIME_ROLE}> ${message}`;
 
     const payload = {
         username: admin.global_name,
