@@ -1,10 +1,6 @@
 {
     "admins": [
         {
-            "id": "188132867778281472",
-            "global_name": "Baredolf"
-        },
-        {
             "id": "384483884915490826",
             "global_name": "blinkdog"
         },
@@ -22,5 +18,9 @@
         }
     ],
     "retired": [
+        {
+            "id": "188132867778281472",
+            "global_name": "Baredolf"
+        }
     ]
 }
