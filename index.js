@@ -18,12 +18,11 @@ const { exec } = require('child_process');
 const cookieParser = require('cookie-parser');
 const express = require('express');
 // const helmet = require('helmet')
-const https = require('https');
 const { request } = require('undici');
 const util = require('util');
 const { v4: uuidv4 } = require('uuid');
 
-const { admins: ADMINS } = require("./admins.json")
+const execAsync = util.promisify(exec);
 
 const {
     BASE_URL, CLIENT_ID, CLIENT_SECRET, DISCORD_REDIRECT_URI,
@@ -34,6 +33,9 @@ const {
 var lastDate = Date.now();
 const sessionStore = {};
 
+//---------------------------------------------------------------------------------------------------------------------
+// create the app and define the routes
+//---------------------------------------------------------------------------------------------------------------------
 
 const app = express();
 app.set('view engine', 'hbs');
@@ -189,6 +191,15 @@ const checkAuth = (req, res, next) => {
         // annotate the request with the user object
         const { user } = sessionStore[sessionId];
         req.user = user;
+        // reload our admin credentials (yes, every time)
+        ADMINS = []
+        try {
+            ADMINS = JSON.parse(fs.readFileSync('admins.json'))['admins'];
+        } catch (error) {
+            // if we couldn't read it, or parse it or something
+            console.log('Unable to read admin data from admins.json; NO admins FOR YOU!');
+            console.error(error);
+        }
         // check our list of admins
         for (admin of ADMINS) {
             // if this user is on the list
@@ -278,20 +289,9 @@ app.post('/server', checkAuth, async (req, res) => {
     return res.redirect('/server');
 });
 
-
-// start listening for incoming connections to the uptime service
-const credentials = { cert: TLS_CERT, key: TLS_KEY };
-const httpsServer = https.createServer(credentials, app);
-httpsServer.listen(PORT, '0.0.0.0', () => {
-    console.log(`Uptime is running on ${BASE_URL}`);
-});
-
-
 //---------------------------------------------------------------------------------------------------------------------
-// utility functions below...
+// utility functions
 //---------------------------------------------------------------------------------------------------------------------
-const execAsync = util.promisify(exec);
-
 
 // get the duration between the last event and now
 function getHumanReadableDuration(lastEvent) {
@@ -464,4 +464,28 @@ async function stopDockerContainer(containerName) {
     } catch (error) {
         console.error('Error executing docker stop command:', error);
     }
+}
+
+//---------------------------------------------------------------------------------------------------------------------
+// start listening for incoming connections to the uptime service
+//---------------------------------------------------------------------------------------------------------------------
+
+// if we were provided SSL/TLS credentials directly
+if(TLS_CERT && TLS_KEY) {
+    // start an httpsServer, handling SSL/TLS ourselves directly
+    const https = require('https');
+    const credentials = { cert: TLS_CERT, key: TLS_KEY };
+    const httpsServer = https.createServer(credentials, app);
+    httpsServer.listen(PORT, '0.0.0.0', () => {
+        console.log(`Uptime is running on ${BASE_URL}`);
+    });
+}
+// otherwise, we don't have SSL/TLS credentials
+else {
+    // start an httpServer and hope that nginx is handling SSL/TLS
+    const http = require('http');
+    const httpServer = http.createServer(app);
+    httpServer.listen(PORT, '0.0.0.0', () => {
+        console.log(`Uptime is running on ${BASE_URL}`);
+    });
 }

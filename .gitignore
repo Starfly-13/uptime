@@ -131,3 +131,6 @@ dist
 
 # don't add logs to version control
 /log
+
+# don't check in local developer cruft
+/dev-local
